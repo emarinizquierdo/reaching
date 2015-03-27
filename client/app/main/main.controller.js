@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('reachingApp')
-    .controller('MainCtrl', function($scope, $http, socket, location, utils) {
+    .controller('MainCtrl', function($scope, $http, $location, socket, location, utils) {
 
         var _routID;
 
@@ -42,7 +42,7 @@ angular.module('reachingApp')
                         latitude: p_position.coords.latitude,
                         longitude: p_position.coords.longitude
                     }).then(function(p_data ){
-                      _routID = p_data.data._id;
+                      $location.path("/emmiter/" + p_data.data._id);
                     });
                 } else {
                     $http.put('/api/things/' + _routID, {
