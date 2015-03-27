@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="app/admin/admin.css">
     <link rel="stylesheet" href="app/app.css">
     <link rel="stylesheet" href="app/emmiter/emmiter.css">
+    <link rel="stylesheet" href="app/lktme/lktme.css">
     <link rel="stylesheet" href="app/main/main.css">
     <!-- endinjector -->
     <!-- endbuild -->
+    <script src='//maps.googleapis.com/maps/api/js?libraries=weather,visualization,places,geometry&sensor=false'></script>
 </head>
 
 <body ng-app="reachingApp">
@@ -37,9 +39,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Add your site or application content here -->
-    <div layout="row" layout-sm="column">
-        <div flex>
-            <div ng-view=""></div>
+    <div layout="row" flex layout-fill layout-sm="column">
+        <div layout="row" flex layout-fill>
+            <div layout="horizontal" flex layout-fill ng-view=""></div>
         </div>        
     </div>
 
@@ -91,8 +93,11 @@
     <script src="app/admin/admin.js"></script>
     <script src="app/emmiter/emmiter.controller.js"></script>
     <script src="app/emmiter/emmiter.js"></script>
+    <script src="app/factories/gmap/gmap.service.js"></script>
     <script src="app/factories/location/location.service.js"></script>
     <script src="app/factories/utils/utils.service.js"></script>
+    <script src="app/lktme/lktme.controller.js"></script>
+    <script src="app/lktme/lktme.js"></script>
     <script src="app/main/main.controller.js"></script>
     <script src="app/main/main.js"></script>
     <script src="components/auth/auth.service.js"></script>

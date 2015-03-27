@@ -16,9 +16,6 @@ function onConnect(socket) {
   socket.on('info', function (data) {
     console.info('[%s] %s', socket.address, JSON.stringify(data, null, 2));
   });
-
-  // Insert sockets below
-  require('../api/thing/thing.socket').register(socket);
 }
 
 module.exports = function (socketio) {
@@ -50,6 +47,10 @@ module.exports = function (socketio) {
       console.info('[%s] DISCONNECTED', socket.address);
     });
 
+    socket.on("emiting", function(item) {
+        console.log(item._id + ':emiting');
+        socketio.emit(item._id + ':emiting', item);
+    });
     // Call onConnect.
     onConnect(socket);
     console.info('[%s] CONNECTED', socket.address);
