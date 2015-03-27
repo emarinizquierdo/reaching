@@ -59,7 +59,7 @@ angular.module('reachingApp')
             }) : p_point;
 
             p_point.setMap(_map.map);
-            _map.map.setCenter(point.getPosition());
+            _map.map.setCenter(p_point.getPosition());
 
             return p_point;
         };
