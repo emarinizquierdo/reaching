@@ -16,6 +16,8 @@ angular.module('reachingApp')
         var directionsService = new google.maps.DirectionsService();
         var directionsDisplay = new google.maps.DirectionsRenderer();
 
+        var home, car;
+
         var mapOptions = {
             zoom: 14,
             center: madrid,
@@ -46,25 +48,25 @@ angular.module('reachingApp')
 
         };
 
-        _map.marker = function( p_point, p_lat, p_long, p_type) {
+        _map.marker = function( p_point, p_position, p_type) {
 
             var iconBase = (p_type == 1) ? 'http://maps.google.com/mapfiles/kml/pal2/icon47.png' : 'http://maps.google.com/mapfiles/kml/pal2/icon10.png';
 
-            if (p_point) point.setMap(null);
+            if (p_point) p_point.setMap(null);
 
-            p_point = (!p_point) ? new google.maps.Marker({
-                position: new google.maps.LatLng(p_lat, p_long),
+            p_point = (!p_point) ? new google.maps.Marker({ 
                 title: 'My position',
                 icon: iconBase
             }) : p_point;
 
+            p_point.setPosition(p_position);
+
             p_point.setMap(_map.map);
-            _map.map.setCenter(p_point.getPosition());
 
             return p_point;
         };
 
-        _map.route = function(o_lat, o_long, d_lat, d_long, p_callback) {
+        _map.route = function(o_lat, o_long, d_lat, d_long, p_callback, p_travelMode) {
 
             var start = new google.maps.LatLng(o_lat, o_long);
             var end = new google.maps.LatLng(d_lat, d_long);
@@ -72,11 +74,14 @@ angular.module('reachingApp')
             var request = {
                 origin: start,
                 destination: end,
-                travelMode: google.maps.TravelMode.WALKING
+                travelMode: (p_travelMode == 'driving') ? google.maps.TravelMode.DRIVING : google.maps.TravelMode.WALKING
             };
 
             directionsService.route(request, function(result, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
+                  var leg = result.routes[ 0 ].legs[ 0 ];
+                    car = _map.marker( car, leg.start_location, 1);
+                    home = _map.marker( home, leg.end_location);
                     directionsDisplay.setDirections(result);
                     p_callback(result)
                     secureApply();
