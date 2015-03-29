@@ -15,7 +15,7 @@ angular.module('reachingApp', [
             });
 
         $mdThemingProvider.theme('default')
-            .primaryPalette('pink')
+            .primaryPalette('blue')
             .accentPalette('orange');
 
         $locationProvider.html5Mode(true);
