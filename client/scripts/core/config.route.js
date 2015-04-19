@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
 
@@ -6,26 +6,122 @@
         .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
             var routes, setRoutes;
 
-            routes = [
-                'dashboard',
-                'ui/cards', 'ui/typography', 'ui/buttons', 'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components', 'ui/timeline', 'ui/lists', 'ui/pricing-tables', 'ui/maps',
-                'tables/static', 'tables/dynamic', 'tables/responsive',
-                'forms/elements', 'forms/layouts', 'forms/validation', 'forms/wizard',
-                'charts/charts', 'charts/flot', 'charts/chartjs',
-                'pages/404', 'pages/500', 'pages/blank', 'pages/forgot-password', 'pages/invoice', 'pages/lock-screen', 'pages/profile', 'pages/signup',
-                'app/calendar'
-            ]
+            routes = [{
+                route: 'dashboard',
+                authenticate: true
+            }, {
+                route: 'ui/cards',
+                authenticate: true
+            }, {
+                route: 'ui/typography',
+                authenticate: true
+            }, {
+                route: 'ui/buttons',
+                authenticate: true
+            }, {
+                route: 'ui/icons',
+                authenticate: true
+            }, {
+                route: 'ui/grids',
+                authenticate: true
+            }, {
+                route: 'ui/widgets',
+                authenticate: true
+            }, {
+                route: 'ui/components',
+                authenticate: true
+            }, {
+                route: 'ui/timeline',
+                authenticate: true
+            }, {
+                route: 'ui/lists',
+                authenticate: true
+            }, {
+                route: 'ui/pricing-tables',
+                authenticate: true
+            }, {
+                route: 'ui/maps',
+                authenticate: true
+            }, 
+            {
+                route: 'tables/static',
+                authenticate: false
+            }, {
+                route: 'tables/dynamic',
+                authenticate: true
+            }, {
+                route: 'tables/responsive',
+                authenticate: true
+            }, {
+                route: 'forms/elements',
+                authenticate: true
+            }, {
+                route: 'forms/layouts',
+                authenticate: true
+            }, {
+                route: 'forms/validation',
+                authenticate: true
+            }, {
+                route: 'forms/wizard',
+                authenticate: true
+            }, {
+                route: 'charts/charts',
+                authenticate: true
+            }, {
+                route: 'charts/flot',
+                authenticate: true
+            }, {
+                route: 'charts/chartjs',
+                authenticate: true
+            }, {
+                route: 'pages/404',
+                authenticate: false
+            }, {
+                route: 'pages/500',
+                authenticate: false
+            }, {
+                route: 'pages/blank',
+                authenticate: false
+            }, {
+                route: 'pages/forgot-password',
+                authenticate: true
+            }, {
+                route: 'pages/invoice',
+                authenticate: true
+            }, {
+                route: 'pages/lock-screen',
+                authenticate: true
+            }, {
+                route: 'pages/profile',
+                authenticate: true
+            }, {
+                route: 'app/calendar',
+                authenticate: true
+            },
+            {
+                route: 'pages/signup',
+                authenticate: false
+            },{
+                route: '/',
+                authenticate: false
+            }];
+           
 
             setRoutes = function(route) {
                 var config, url;
-                url = '/' + route;
+                url = '/' + route.route;
+
                 config = {
                     url: url,
-                    templateUrl: 'views/' + route + '.html'
+                    templateUrl: 'views/' + route.route + '.html',
+                    authenticate : route.authenticate
                 };
-                $stateProvider.state(route, config);
+
+                $stateProvider.state(route.route, config);
+
                 return $stateProvider;
             };
+
 
             routes.forEach(function(route) {
                 return setRoutes(route);
@@ -35,7 +131,6 @@
                 .when('/', '/dashboard')
                 .otherwise('/dashboard');
 
-        }]
-    );
+        }]);
 
-})(); 
+})();

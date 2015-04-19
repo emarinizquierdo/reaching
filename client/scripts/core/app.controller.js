@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('app')
-    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$document', 'Auth', AppCtrl]) // overall control
+    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$document', '$location', 'Auth', AppCtrl]) // overall control
     .config(['$mdThemingProvider', '$httpProvider', mdConfig])
 
-function AppCtrl($scope, $rootScope, $state, $document, Auth) {
+function AppCtrl($scope, $rootScope, $state, $document, $location, Auth) {
 
     var date = new Date();
     var year = date.getFullYear();
@@ -29,7 +29,7 @@ function AppCtrl($scope, $rootScope, $state, $document, Auth) {
 
     $scope.logout = function() {
         Auth.logout();
-        $location.path('/login');
+        $location.path('pages/signup');
     };
 
     $scope.isActive = function(route) {
@@ -71,6 +71,17 @@ function AppCtrl($scope, $rootScope, $state, $document, Auth) {
 
     $rootScope.$on("$stateChangeSuccess", function(event, currentRoute, previousRoute) {
         $document.scrollTo(0, 0);
+    });
+
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
+        if (toState.authenticate){
+            Auth.isLoggedInAsync(function(logged){
+                if(!logged){
+                    $state.transitionTo('pages/signup');
+                    event.preventDefault();
+                }
+            });
+        }
     });
 
 }
