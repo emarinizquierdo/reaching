@@ -1,7 +1,12 @@
 node_modules
-public
-.tmp
-.idea
-client/bower_components
 dist
-/server/config/local.env.js
+.tmp
+.sass-cache
+client/bower_components
+landing/bower_components
+landing/css/main.css
+landing/vendors
+
+.DS_Store
+npm-debug.log
+/preview/preview.zip
