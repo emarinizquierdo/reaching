@@ -1,10 +1,10 @@
-<div class="page page-dashboard">
+<div class="page page-dashboard" ng-controller="dashboardCtrl">
     <div class="row">
         <div class="col-lg-8 col-xsm-7">
             <h2 class="section-header">Dashboard</h2>
             <p class="lead">Gestiona usuarios que podrán ver dónde te encuentras</p>
         </div>
-        <div class="col-lg-4 col-xsm-5row" data-ng-controller="chartCtrl">
+        <div class="col-lg-4 col-xsm-5row">
             <div class="col-lg-6 col-xsm-6">
                 <div class="panel panel-default">
                     <div class="panel-body text-center">
@@ -45,24 +45,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Amery Lee</td>
-                                                <td><span class="label label-info">Pending</span></td>
+                                            <tr ng-repeat="friend in friends">
+                                                <td>{{$index}}</td>
+                                                <td>{{friend.email}}</td>
+                                                <td><span class="label label-info">{{friend.canSee}}</span></td>
                                                 <td>
-                                                    <progressbar class="progressbar-xs no-margin" value="55"></progressbar>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Romayne Carlyn</td>
-                                                <td><span class="label label-primary">Due</span></td>
-                                                <td>
-                                                    <progressbar class="progressbar-xs no-margin" value="34" type="success"></progressbar>
+                                                    <span class="label label-info">{{friend.seeing}}</span>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div layout layout-sm="column margin" layout-margin ng-if="totalFriends > friends.length">
+                                    <md-input-container flex>
+                                        <label>Email</label>
+                                        <input ng-model="friend.email">
+                                    </md-input-container>                                    
+                                    <md-button type="submit" class="md-raised md-accent btn-w-md" ng-click="savePost(friend)">Add</md-button>
                                 </div>
                             </div>
                         </div>
