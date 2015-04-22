@@ -1,17 +1,46 @@
 'use strict';
 
 angular.module('app')
-    .controller('dashboardCtrl', ['$scope', '$window', 'Friend', function($scope, $window, Friend) {
+    .controller('dashboardCtrl', ['$scope', '$window', 'Friend', 'Device', function($scope, $window, Friend, Device) {
 
     	$scope.totalFriends = 10;
     	$scope.friends = [];
+    	$scope.devices = [];
 
-        $scope.savePost = function(p_data) {
+    	$scope.saveDevice = function(p_data) {
+
+            Device.create(p_data, _LoadDevices, function(data){
+
+            });
+
+        }
+
+        $scope.deleteDevice = function(_id) {
+            Device.delete({id : _id}, _LoadDevices, function(error) {
+
+            });
+        }
+
+        $scope.saveFriend = function(p_data) {
 
             Friend.create(p_data, _LoadFriends, function(data){
 
             });
 
+        }
+
+        $scope.deleteFriend = function(_id) {
+            Friend.delete({id : _id}, _LoadFriends, function(error) {
+
+            });
+        }
+
+        function _LoadDevices() {
+            Device.get(null, function(data){
+            	$scope.devices = data;
+            }, function(data){
+
+            })
         }
 
         function _LoadFriends() {
@@ -37,6 +66,7 @@ angular.module('app')
             }
         };
 
+        _LoadDevices();
         _LoadFriends();
 
     }]);

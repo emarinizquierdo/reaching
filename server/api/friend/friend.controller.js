@@ -14,7 +14,8 @@ var Friend = require('./friend.model');
 
 // Get list of friends
 exports.index = function(req, res) {
-    Friend.find(function(err, friends) {
+  var userId = req.user._id;
+    Friend.find({userId : userId}, function(err, friends) {
         if (err) {
             return handleError(res, err);
         }
@@ -24,7 +25,8 @@ exports.index = function(req, res) {
 
 // Get a single friend
 exports.show = function(req, res) {
-    Friend.findById(req.params.id, function(err, friend) {
+  var userId = req.user._id;
+    Friend.find({_id : req.params.id, userId : userId}, function(err, friend) {
         if (err) {
             return handleError(res, err);
         }
@@ -37,6 +39,7 @@ exports.show = function(req, res) {
 
 // Creates a new friend in the DB.
 exports.create = function(req, res) {
+  req.body.userId = req.user._id;
     Friend.create(req.body, function(err, friend) {
         if (err) {
             return handleError(res, err);
@@ -47,10 +50,11 @@ exports.create = function(req, res) {
 
 // Updates an existing friend in the DB.
 exports.update = function(req, res) {
+  var userId = req.user._id;
     if (req.body._id) {
         delete req.body._id;
     }
-    Friend.findById(req.params.id, function(err, friend) {
+    Friend.find({_id : req.params.id, userId : userId}, function(err, friend) {
         if (err) {
             return handleError(res, err);
         }
@@ -69,7 +73,8 @@ exports.update = function(req, res) {
 
 // Deletes a friend from the DB.
 exports.destroy = function(req, res) {
-    Friend.findById(req.params.id, function(err, friend) {
+  var userId = req.user._id;
+    Friend.findOneAndRemove({ _id : req.params.id, userId : userId}, function(err, friend) {
         if (err) {
             return handleError(res, err);
         }

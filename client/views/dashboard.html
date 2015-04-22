@@ -39,9 +39,48 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>Device Id</th>
+                                                <th>Activar</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="device in devices">
+                                                <td>{{$index}}</td>
+                                                <td>{{device.deviceId}}</td>
+                                                <td><span class="label label-info">{{device.status}}</span></td>
+                                                <td>
+                                                    <md-button class="md-raised md-warn btn-xs" ng-click="deleteDevice(device._id)"><span class="imd imd-delete"></span></md-button>
+                                                    <div class="divider"></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length">
+                                    <div flex="66">
+                                        <md-input-container>
+                                            <label>DeviceId</label>
+                                            <input ng-model="device.deviceId">
+                                        </md-input-container>
+                                    </div>
+                                    <div flex="33">
+                                        <md-button ng-click="saveDevice(device)" class="md-raised btn-w-sm md-primary">Add</md-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body table-responsive">
+                                    <table class="table no-margin">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
                                                 <th>Usuario</th>
                                                 <th>Puede verte</th>
                                                 <th>Puedes verle</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -52,16 +91,24 @@
                                                 <td>
                                                     <span class="label label-info">{{friend.seeing}}</span>
                                                 </td>
+                                                <td>
+                                                    <md-button class="md-raised md-warn btn-xs" ng-click="deleteFriend(friend._id)"><span class="imd imd-delete"></span></md-button>
+                                                    <div class="divider"></div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div layout layout-sm="column margin" layout-margin ng-if="totalFriends > friends.length">
-                                    <md-input-container flex>
-                                        <label>Email</label>
-                                        <input ng-model="friend.email">
-                                    </md-input-container>                                    
-                                    <md-button type="submit" class="md-raised md-accent btn-w-md" ng-click="savePost(friend)">Add</md-button>
+                                <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length">
+                                    <div flex="66">
+                                        <md-input-container>
+                                            <label>Email</label>
+                                            <input ng-model="friend.email">
+                                        </md-input-container>
+                                    </div>
+                                    <div flex="33">
+                                        <md-button ng-click="saveFriend(friend)" class="md-raised btn-w-sm md-primary">Add</md-button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
