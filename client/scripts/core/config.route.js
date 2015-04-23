@@ -7,6 +7,9 @@
             var routes, setRoutes;
 
             routes = [{
+                route: 'emmiter',
+                authenticate: true
+            },{
                 route: 'dashboard',
                 authenticate: true
             }, {

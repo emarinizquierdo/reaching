@@ -7,6 +7,7 @@
         ,'ngAria'
         ,'ngResource'
         ,'ngCookies'
+        ,'btford.socket-io',
   
         // 3rd Party Modules
         ,'ngMaterial'

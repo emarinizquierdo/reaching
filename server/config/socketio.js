@@ -48,8 +48,8 @@ module.exports = function (socketio) {
     });
 
     socket.on("emiting", function(item) {
-        console.log(item._id + ':emiting');
-        socketio.emit(item._id + ':emiting', item);
+        console.log(item + ':emiting');
+        socketio.emit(item + ':emiting', item);
     });
     // Call onConnect.
     onConnect(socket);

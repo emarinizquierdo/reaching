@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="styles/material-design-iconic-font.css">
     <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/ui.css">
-    <link rel="stylesheet" href="styles/main.css">    
+    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/custom.css">
     <!-- endbuild -->
 </head>
@@ -61,7 +61,6 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -98,6 +97,8 @@
     <script src="bower_components/Chart.js/Chart.min.js"></script>
     <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
     <!-- endbuild -->
+    <script src="bower_components/angular-socket-io/socket.js"></script>
+    <script src="socket.io-client/socket.io.js"></script>
     <script src="scripts/app.module.js"></script>
     <script src="scripts/core/config.route.js"></script>
     <script src="scripts/core/app.controller.js"></script>
@@ -125,16 +126,18 @@
     <script src="scripts/ui/map.module.js"></script>
     <script src="scripts/ui/map.controller.js"></script>
     <script src="scripts/ui/map.directive.js"></script>
-    
     <!-- injector:js -->
+    <script src="app/emmiter/emmiter.controller.js"></script>
     <script src="app/scripts/controllers/dashboardCtrl.js"></script>
+    <script src="app/scripts/controllers/mapCtrl.js"></script>
     <script src="app/scripts/services/deviceFct.js"></script>
     <script src="app/scripts/services/friendFct.js"></script>
+    <script src="app/scripts/services/locationFct.js"></script>
+    <script src="app/scripts/services/socketFct.js"></script>
     <script src="components/auth/auth.service.js"></script>
     <script src="components/auth/user.service.js"></script>
     <script src="components/mongoose-error/mongoose-error.directive.js"></script>
     <script src="components/navbar/navbar.controller.js"></script>
-    <script src="components/socket/socket.service.js"></script>
     <!-- endinjector -->
     <!-- endbuild -->
 </body>

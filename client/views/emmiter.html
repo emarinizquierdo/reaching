@@ -1,0 +1,21 @@
+<div layout="column" flex layout-fill ng-controller="emmiterCtrl">
+    <md-toolbar>
+        <h2 class="md-toolbar-tools">
+        <a ng-href="/"><span>I'm coming!</span></a>
+      </h2>
+    </md-toolbar>
+    <md-card>
+        <md-card-content>
+            <h2 class="md-title">I am going to you!</h2>
+            <p>
+                You can share your position to let's people when you'll arrive! Copy the follow links and share it with your people. Now we are in beta.
+            </p>
+            <section layout="column" layout-margin>
+                <a href="http://hermes-nefele.rhcloud.com/lktme/{{route._id}}">I'm going by car</a>
+            </section>
+            <section layout="column" layout-margin>
+                <a ng-href="http://hermes-nefele.rhcloud.com/{{route._id}}?travelMode=walking">I'm going by foot</a>
+            </section>
+        </md-card-content>
+    </md-card>
+</div>
