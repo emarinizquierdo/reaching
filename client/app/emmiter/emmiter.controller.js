@@ -14,7 +14,7 @@ angular.module('app')
             	console.log('emiting');
                 $scope.route.latitude = p_position.coords.latitude;
                 $scope.route.longitude = p_position.coords.longitude;
-                socket.emit(_routeID);
+                socket.emit($scope.route);
                 $timeout(beacon, 5000);
             });
 
