@@ -56,49 +56,68 @@
         </div>
     </div>
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- build:js({client,node_modules}) app/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <!-- endbuild -->
-    <!-- build:js scripts/ui.js -->
-    <script src="bower_components/angular-material/angular-material.min.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="bower_components/jquery-steps/build/jquery.steps.min.js"></script>
-    <script src="bower_components/toastr/toastr.min.js"></script>
-    <script src="bower_components/bootstrap-file-input/bootstrap.file-input.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/jquery-steps/build/jquery.steps.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
     <script src="bower_components/jquery.slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="scripts/vendors/jquery.sparkline.min.js"></script>
     <script src="bower_components/flot/jquery.flot.js"></script>
-    <script src="bower_components/flot/jquery.flot.resize.js"></script>
-    <script src="bower_components/flot/jquery.flot.pie.js"></script>
-    <script src="scripts/vendors/jquery.flot.orderBars.js"></script>
-    <script src="bower_components/flot/jquery.flot.stack.js"></script>
+    <script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.js"></script>
     <script src="bower_components/flot.curvedlines/curvedLines.js"></script>
-    <script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="bower_components/flot/jquery.flot.time.js"></script>
-    <script src="bower_components/jquery.easy-pie-chart/dist/angular.easypiechart.min.js"></script>
-    <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.min.js"></script>
-    <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+    <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+    <script src="bower_components/rangy/rangy-core.min.js"></script>
+    <script src="bower_components/rangy/rangy-cssclassapplier.min.js"></script>
+    <script src="bower_components/rangy/rangy-selectionsaverestore.min.js"></script>
+    <script src="bower_components/rangy/rangy-serializer.min.js"></script>
+    <script src="bower_components/textAngular/src/textAngular.js"></script>
+    <script src="bower_components/textAngular/src/textAngular-sanitize.js"></script>
+    <script src="bower_components/textAngular/src/textAngularSetup.js"></script>
+    <script src="bower_components/rangy-official/rangy-selectionsaverestore.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
+    <script src="bower_components/jquery-bridget/jquery.bridget.js"></script>
+    <script src="bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/angular-wizard/dist/angular-wizard.js"></script>
+    <!-- endbower -->
+
+    <script src="scripts/vendors/jquery.flot.orderBars.js"></script>
+    <script src="scripts/vendors/jquery.sparkline.min.js"></script>
     <script src="scripts/vendors/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="scripts/vendors/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
-    <script src="bower_components/angular-scroll/angular-scroll.min.js"></script>
-    <script src="bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
-    <script src="bower_components/textAngular/dist/textAngular.min.js"></script>
-    <script src="bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
-    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
-    <script src="bower_components/Chart.js/Chart.min.js"></script>
-    <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
-    <!-- endbuild -->
-    <script src="bower_components/angular-socket-io/socket.js"></script>
     <script src="socket.io-client/socket.io.js"></script>
+    <!-- endbuild -->
+
+
+    
+
+     <!-- build:js({.tmp,client}) app/app.js -->
+
     <script src="scripts/app.module.js"></script>
     <script src="scripts/core/config.route.js"></script>
     <script src="scripts/core/app.controller.js"></script>

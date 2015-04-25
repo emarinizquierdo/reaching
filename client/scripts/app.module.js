@@ -13,7 +13,6 @@
         ,'ngMaterial'
         ,'ui.router'
         ,'ui.bootstrap'
-        ,'easypiechart'
         ,'ui.tree'
         ,'ngMap'
         ,'ngTagsInput'
