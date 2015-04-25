@@ -28,13 +28,13 @@ angular.module('app')
              * @param {Array} array
              * @param {Function} cb
              */
-            listen: function(p_id, cb) {
+            listen: function( p_key, cb) {
                 cb = cb || angular.noop;
 
                 /**
                  * Syncs item creation/updates on 'model:save'
                  */
-                socket.on(p_id + ':emiting', function(item) {
+                socket.on( "emmiting:" + p_key , function(item) {
                     console.log('receiving');
                     cb(item);
                 });
@@ -50,7 +50,7 @@ angular.module('app')
              * @param modelName
              */
             unsyncUpdates: function(p_id) {
-                socket.removeAllListeners(p_id + ':emiting');
+                socket.removeAllListeners( "emmiting:" + p_key );
             }
         };
     });

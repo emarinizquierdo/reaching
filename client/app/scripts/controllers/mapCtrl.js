@@ -1,47 +1,61 @@
     angular.module('app')
-        .controller('MapCtrl', ['$scope', '$http', '$interval', 'socket', function($scope, $http, $interval, socket) {
+        .controller('MapCtrl', ['$scope', '$http', '$interval', 'socket', 'Friend', 'Auth', function($scope, $http, $interval, socket, Friend, Auth) {
 
             var i, marker = new google.maps.Marker({
-                    title: "Marker: "
-                });
+                title: "Marker: "
+            });
 
 
-            var _routeID = "testtoken";
+            var _routeID = "emmiting:";
             var _travelMode = 'driving';
             $scope.route;
             $scope.myPosition = {};
 
-            var init = function(p_callback) {
+            var _handler = function(p_route) {
 
-                socket.listen( _routeID, function(p_route) {
 
-                    
+                $scope.GenerateMapMarkers( p_route.latitude, p_route.longitude);
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
 
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
+            };
+
+
+
+            $scope.GenerateMapMarkers = function( p_lat, p_long) {
+
+                var loc;
+                loc = new google.maps.LatLng(p_lat, p_long);
+                marker.setPosition(loc);
+                marker.setMap($scope.map);
+
+            };
+
+
+            var _LoadFriends = function() {
+                Friend.get(null, function(data) {
+                    friends = data;
+                    _emmitForEach(friends);
+                }, function(data) {
+
+                })
+            }
+
+            var _emmitForEach = function(p_friends) {
+                angular.forEach(p_friends, function(p_friend) {
+                    var _me = Auth.getCurrentUser()
+                    if (_me.google && _me.google.etag && p_friend && p_friend.userInfo && p_friend.userInfo.google && p_friend.userInfo.google.etag) {
+                        var _key = p_friend.userInfo.google.etag.replace(/\"/g, "") + ":" + _me.google.etag.replace(/\"/g, "");
+                        socket.listen(_key, _handler);
+                        $scope.$on('$destroy', function() {
+                            socket.unsyncUpdates(_routeID);
+                        });
                     }
 
-                });
+                })
+            }
 
-                $scope.$on('$destroy', function() {
-                    socket.unsyncUpdates(_routeID);
-                });
-
-            };
-
-            $scope.GenerateMapMarkers = function() {
-                var lat, lng, loc;
-
-                    lat = 43.6600000 + (Math.random() / 100);
-                    lng = -79.4103000 + (Math.random() / 100);
-                    loc = new google.maps.LatLng(lat, lng);
-                    marker.setPosition(loc);
-                    marker.setMap($scope.map);
-
-            };
-
-            $interval($scope.GenerateMapMarkers, 2000);
-
-            init();
+            _LoadFriends();
 
         }]);

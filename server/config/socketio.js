@@ -48,9 +48,10 @@ module.exports = function (socketio) {
     });
 
     socket.on("emiting", function(item) {
-        console.log(item + ':emiting');
-        socketio.emit(item + ':emiting', item);
+        console.log(item.emitKey);
+        socketio.emit("emmiting:" + item.emitKey, item);
     });
+
     // Call onConnect.
     onConnect(socket);
     console.info('[%s] CONNECTED', socket.address);
