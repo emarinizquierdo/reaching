@@ -45,8 +45,8 @@
             var _emmitForEach = function(p_friends) {
                 angular.forEach(p_friends, function(p_friend) {
                     var _me = Auth.getCurrentUser()
-                    if (_me.google && _me.google.etag && p_friend && p_friend.userInfo && p_friend.userInfo.google && p_friend.userInfo.google.etag) {
-                        var _key = p_friend.userInfo.google.etag.replace(/\"/g, "") + ":" + _me.google.etag.replace(/\"/g, "");
+                    if (_me.google && _me.google.id && p_friend && p_friend.userInfo && p_friend.userInfo.google && p_friend.userInfo.google.id) {
+                        var _key = p_friend.userInfo.google.id.replace(/\"/g, "") + ":" + _me.google.id.replace(/\"/g, "");
                         socket.listen(_key, _handler);
                         $scope.$on('$destroy', function() {
                             socket.unsyncUpdates(_routeID);

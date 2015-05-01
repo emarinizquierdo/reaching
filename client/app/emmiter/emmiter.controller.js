@@ -38,8 +38,8 @@ angular.module('app')
         var _emmitForEach = function(p_friends) {
             angular.forEach(p_friends, function(p_friend) {
                 var _me = Auth.getCurrentUser()
-                if (_me.google && _me.google.etag && p_friend && p_friend.userInfo && p_friend.userInfo.google && p_friend.userInfo.google.etag) {
-                    var _key = _me.google.etag.replace(/\"/g, "") + ":" + p_friend.userInfo.google.etag.replace(/\"/g, "");
+                if (_me.google && _me.google.id && p_friend && p_friend.userInfo && p_friend.userInfo.google && p_friend.userInfo.google.id) {
+                    var _key = _me.google.id.replace(/\"/g, "") + ":" + p_friend.userInfo.google.id.replace(/\"/g, "");
                     $scope.route.emitKey = _key;
                     socket.emit($scope.route);
                 }

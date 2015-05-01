@@ -2,10 +2,12 @@
 'use strict';
 
 angular.module('app')
-    .factory('socket', function(socketFactory) {
+    .factory('socket', function($location, socketFactory) {
 
+        var _host = ($location.host() == "location") ? '' : 'hermes-nefele.rhcloud.com:8000';
+        
         // socket.io now auto-configures its connection when we ommit a connection url
-        var ioSocket = io('', {
+        var ioSocket = io(_host, {
             // Send auth token on connection, you will need to DI the Auth service above
             // 'query': 'token=' + Auth.getToken()
             path: '/socket.io-client'

@@ -24,7 +24,7 @@ angular.module('app')
          
           //.coords.latitude;
           //.coords.longitude;
-          navigator.geolocation.getCurrentPosition(p_geoSuccess, geoError, geoOptions);
+          navigator.geolocation.watchPosition(p_geoSuccess, geoError, geoOptions);
 
         };
 

@@ -70,7 +70,7 @@ function AppCtrl($scope, $rootScope, $state, $document, $location, Auth) {
     };
 
     $rootScope.$on("$stateChangeSuccess", function(event, currentRoute, previousRoute) {
-        $document.scrollTo(0, 0);
+        //$document.scrollTo(0, 0);
     });
 
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {

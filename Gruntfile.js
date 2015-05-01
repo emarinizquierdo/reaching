@@ -300,15 +300,15 @@ module.exports = function (grunt) {
     ngtemplates: {
       options: {
         // This should be the name of your apps angular module
-        module: 'reachingApp',
+        module: 'app',
         htmlmin: {
-          collapseBooleanAttributes: true,
-          collapseWhitespace: true,
-          removeAttributeQuotes: true,
-          removeEmptyAttributes: true,
-          removeRedundantAttributes: true,
-          removeScriptTypeAttributes: true,
-          removeStyleLinkTypeAttributes: true
+          collapseBooleanAttributes: false,
+          collapseWhitespace: false,
+          removeAttributeQuotes: false,
+          removeEmptyAttributes: false,
+          removeRedundantAttributes: false,
+          removeScriptTypeAttributes: false,
+          removeStyleLinkTypeAttributes: false
         },
         usemin: 'app/app.js'
       },
@@ -345,6 +345,14 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'assets/images/{,*/}*.{webp}',
             'assets/fonts/**/*',
+            'fonts/**/*',
+            'i18n/**/*',
+            'scripts/**/*',
+            'app/**/*',
+            'components/**/*',
+            'styles/**/*',
+            'images/**/*',
+            'views/**/*',
             'index.html'
           ]
         }, {

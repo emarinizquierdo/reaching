@@ -94,7 +94,7 @@
 
             <li class="dropdown text-normal nav-profile"  dropdown is-open="status.isopenProfile">
                 <a href="javascript:;" class="dropdown-toggle" dropdown-toggle ng-disabled="disabled" ui-wave>
-                    <img ng-src="{{getCurrentUser().google.image.url}}" alt="" class="img-circle img30_30">
+                    <img ng-src="{{getCurrentUser().google.image.url || getCurrentUser().google.picture}}" alt="" class="img-circle img30_30">
                     <span class="hidden-xs">
                         <span >{{getCurrentUser().name}}</span>
                     </span>

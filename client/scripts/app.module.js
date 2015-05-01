@@ -4,7 +4,6 @@
     angular.module('app', [
         // Angular modules
          'ngAnimate'
-        ,'ngAria'
         ,'ngResource'
         ,'ngCookies'
         ,'btford.socket-io',
@@ -13,18 +12,18 @@
         ,'ngMaterial'
         ,'ui.router'
         ,'ui.bootstrap'
-        ,'ui.tree'
+        //,'ui.tree'
         ,'ngMap'
-        ,'ngTagsInput'
-        ,'textAngular'
-        ,'angular-loading-bar'
-        ,'duScroll'
+        //,'ngTagsInput'
+        //,'textAngular'
+        //,'angular-loading-bar'
+        //,'duScroll'
   
         // Custom module
-        ,'app.nav'
+        //,'app.nav'
         ,'app.i18n'
-        ,'app.chart'
-        ,'app.ui'
+        //,'app.chart'
+        //,'app.ui'
         ,'app.ui.form'
         ,'app.ui.form.validation'
         ,'app.ui.map'
