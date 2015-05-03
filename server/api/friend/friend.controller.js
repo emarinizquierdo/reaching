@@ -32,6 +32,10 @@ exports.index = function(req, res) {
 
 var _matchUserEmail = function(_index, _total, _friends, _callback) {
 
+    if(!_friends || !_friends[_index]){
+        return 
+    }
+    
     var _aux = _.clone(_friends[_index], false);
     User.findOne({
         email: _friends[_index].email

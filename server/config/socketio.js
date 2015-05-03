@@ -47,9 +47,9 @@ module.exports = function (socketio) {
       console.info('[%s] DISCONNECTED', socket.address);
     });
 
-    socket.on("emiting", function(item) {
-        console.log(item.emitKey);
-        socketio.emit("emmiting:" + item.emitKey, item);
+    socket.on("emiting", function( p_data ) {
+        console.log("emmiting:" + p_data.email + ":" + p_data.target);
+        socketio.emit("emmiting:" + p_data.email + ":" + p_data.target, p_data);
     });
 
     // Call onConnect.

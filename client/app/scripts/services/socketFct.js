@@ -4,8 +4,8 @@
 angular.module('app')
     .factory('socket', function($location, socketFactory) {
 
-        var _host = ($location.host() == "location") ? '' : 'hermes-nefele.rhcloud.com:8000';
-        
+        var _host = ($location.host() == "localhost") ? '' : 'hermes-nefele.rhcloud.com:8000';
+
         // socket.io now auto-configures its connection when we ommit a connection url
         var ioSocket = io(_host, {
             // Send auth token on connection, you will need to DI the Auth service above
@@ -30,22 +30,25 @@ angular.module('app')
              * @param {Array} array
              * @param {Function} cb
              */
-            listen: function( p_key, cb) {
+            listenPositions: function( p_from, p_me, cb) {
                 cb = cb || angular.noop;
 
                 /**
                  * Syncs item creation/updates on 'model:save'
                  */
-                socket.on( "emmiting:" + p_key , function(item) {
-                    console.log('receiving');
+                console.log("emmiting:" + p_from + ":" + p_me);
+                socket.on( "emmiting:" + p_from + ":" + p_me, function(item) {
+                    console.log('receiving position');
                     cb(item);
                 });
 
             },
 
-            emit: function(p_model) {
-              socket.emit('emiting', p_model);
+            emit: function(p_target, p_me, p_info) {
+              console.log("emmiting:" + p_me + ":" + p_target);
+              socket.emit('emiting', {target: p_target, email: p_me, info: p_info});
             },
+
             /**
              * Removes listeners for a models updates on the socket
              *

@@ -1,5 +1,5 @@
     angular.module('app')
-        .controller('MapCtrl', ['$scope', '$http', '$interval', 'socket', 'Friend', 'Auth', function($scope, $http, $interval, socket, Friend, Auth) {
+        .controller('MapCtrl', ['$scope', '$http', '$interval', 'socket', 'Friend', 'Auth', 'HotFriends', function($scope, $http, $interval, socket, Friend, Auth, HotFriends) {
 
             var i, marker = new google.maps.Marker({
                 title: "Marker: "
@@ -10,20 +10,9 @@
             var _travelMode = 'driving';
             $scope.route;
             $scope.myPosition = {};
+            $scope.HotFriends = HotFriends;
 
-            var _handler = function(p_route) {
-
-
-                $scope.GenerateMapMarkers( p_route.latitude, p_route.longitude);
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-
-            };
-
-
-
-            $scope.GenerateMapMarkers = function( p_lat, p_long) {
+            _refreshMark = function(p_lat, p_long) {
 
                 var loc;
                 loc = new google.maps.LatLng(p_lat, p_long);
@@ -32,30 +21,16 @@
 
             };
 
-
-            var _LoadFriends = function() {
-                Friend.get(null, function(data) {
-                    friends = data;
-                    _emmitForEach(friends);
-                }, function(data) {
-
+            var _refreshMarks = function() {
+                angular.forEach($scope.HotFriends.list, function(p_friend) {
+                    _refreshMark(p_friend.latitude, p_friend.latitude);
                 })
             }
 
-            var _emmitForEach = function(p_friends) {
-                angular.forEach(p_friends, function(p_friend) {
-                    var _me = Auth.getCurrentUser()
-                    if (_me.google && _me.google.id && p_friend && p_friend.userInfo && p_friend.userInfo.google && p_friend.userInfo.google.id) {
-                        var _key = p_friend.userInfo.google.id.replace(/\"/g, "") + ":" + _me.google.id.replace(/\"/g, "");
-                        socket.listen(_key, _handler);
-                        $scope.$on('$destroy', function() {
-                            socket.unsyncUpdates(_routeID);
-                        });
-                    }
+            $scope.$watch('HotFriends.list', function(p_new, p_old) {
+                _refreshMarks();
+            }, true)
 
-                })
-            }
 
-            _LoadFriends();
 
         }]);

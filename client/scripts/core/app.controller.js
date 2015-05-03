@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('app')
-    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$document', '$location', 'Auth', AppCtrl]) // overall control
+    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$document', '$location', 'Auth', 'commuter', AppCtrl]) // overall control
     .config(['$mdThemingProvider', '$httpProvider', mdConfig])
 
-function AppCtrl($scope, $rootScope, $state, $document, $location, Auth) {
+function AppCtrl($scope, $rootScope, $state, $document, $location, Auth, commuter) {
 
     var date = new Date();
     var year = date.getFullYear();
