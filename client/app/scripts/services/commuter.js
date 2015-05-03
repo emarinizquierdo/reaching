@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .factory('commuter', function(Friend, HotFriends, Auth, socket) {
+    .factory('commuter', function(Friend, HotFriends, Auth, socket, location) {
 
         var _commuter = {};
         var _me = Auth.getCurrentUser()
@@ -18,7 +18,7 @@ angular.module('app')
                 }
 
                 _addTokenForListenFriend(HotFriends.list);
-
+                beacon();
 
             }, function(data) {
 
@@ -41,13 +41,23 @@ angular.module('app')
             }
         };
 
-        var guid = function() {
-            function s4() {
-                return Math.floor((1 + Math.random()) * 0x10000)
-                    .toString(16)
-                    .substring(1);
-            }
-            return s4() + s4() + '-' + s4() + '-' + s4();
+        var beacon = function() {
+
+            location.position(function(p_position) {
+                console.log('emiting');
+                $scope.info.latitude = p_position.coords.latitude;
+                $scope.info.longitude = p_position.coords.longitude;
+                _emmitForEach(friends);
+                $timeout(beacon, 5000);
+            });
+
+        };
+
+        var _emmitForEach = function(p_friends) {
+            angular.forEach(HotFriends.list, function(p_friend) {
+                $scope.info.email = _me.email;
+                socket.emit(p_friend.email, _me.email, $scope.info);
+            });
         }
 
         var _init = function() {

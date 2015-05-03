@@ -23,7 +23,7 @@
 
             var _refreshMarks = function() {
                 angular.forEach($scope.HotFriends.list, function(p_friend) {
-                    _refreshMark(p_friend.latitude, p_friend.latitude);
+                    _refreshMark(p_friend.latitude, p_friend.longitude);
                 })
             }
 
