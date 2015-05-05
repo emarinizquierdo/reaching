@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .factory('location', function($location) {
+    .factory('location', function($rootScope, $location, $q) {
 
         var _location = {};
 
@@ -20,17 +20,28 @@ angular.module('app')
             //   3: timed out
         };
 
-        _location.position = function(p_geoSuccess) {
+        _location.position = function() {
 
-            //.coords.latitude;
-            //.coords.longitude;
-            if ($location.host() != "localhost") {
-                navigator.geolocation.getCurrentPosition(p_geoSuccess, geoError);
-            } else {
-                navigator.geolocation.watchPosition(p_geoSuccess, geoError);
-            }
+            var _deferred = $q.defer();
+
+            navigator.geolocation.getCurrentPosition(function(p_data) {
+                _deferred.resolve(p_data);
+                _secApply();
+            }, function(p_error) {
+                console.log('Error occurred. Error code: ' + p_error.code);
+                _deferred.reject();
+                _secApply();
+            });
+
+            return _deferred.promise;
 
         };
+
+        var _secApply = function() {
+            if (!$rootScope.$phase) {
+                $rootScope.$apply();
+            }
+        }
 
         return _location;
     });

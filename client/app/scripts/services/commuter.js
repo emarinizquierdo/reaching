@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .factory('commuter', function(Friend, HotFriends, Auth, socket, location) {
+    .factory('commuter', function(Friend, HotFriends, Auth, socket, location, $timeout) {
 
         var _commuter = {};
         var _me = Auth.getCurrentUser()
@@ -43,20 +43,24 @@ angular.module('app')
 
         var beacon = function() {
 
-            location.position(function(p_position) {
+            var info = {};
+
+            location.position().then(function(p_position) {
+                
                 console.log('emiting');
-                $scope.info.latitude = p_position.coords.latitude;
-                $scope.info.longitude = p_position.coords.longitude;
-                _emmitForEach(friends);
+                info.latitude = p_position.coords.latitude;
+                info.longitude = p_position.coords.longitude;
+                _emmitForEach(HotFriends.list, info);
                 $timeout(beacon, 5000);
+
             });
 
         };
 
-        var _emmitForEach = function(p_friends) {
+        var _emmitForEach = function(p_friends, p_info) {
             angular.forEach(HotFriends.list, function(p_friend) {
-                $scope.info.email = _me.email;
-                socket.emit(p_friend.email, _me.email, $scope.info);
+                p_info.email = _me.email;
+                socket.emit(p_friend.email, _me.email, p_info);
             });
         }
 
