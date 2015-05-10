@@ -105,6 +105,16 @@
                                             <label>Email</label>
                                             <input ng-model="friend.email">
                                         </md-input-container>
+                                        <angucomplete id="members"
+              placeholder="Search members"
+              pause="400"
+              selectedobject="testObj"
+              url="http://myserver.com/api/user/find?s="
+              datafield="results"
+              titlefield="displayName"
+              descriptionfield="email"
+              imagefield="profilePic"
+              inputclass="form-control form-control-small"/>
                                     </div>
                                     <div flex="33">
                                         <md-button ng-click="saveFriend(friend)" class="md-raised btn-w-sm md-primary">Add</md-button>

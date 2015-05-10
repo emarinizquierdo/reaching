@@ -29,6 +29,8 @@
         ,'app.ui.map'
         ,'app.page'
         ,'app.table'
+
+        ,"angucomplete"
     ]);
 
 })();

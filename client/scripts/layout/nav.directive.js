@@ -19,7 +19,7 @@
         function link(scope, ele, attrs) {
             var app;
 
-            app = $('#app');
+            app = document.querySelector('#app');
 
             ele.on('click', function(e) {
                 if (app.hasClass('nav-collapsed-min')) {
@@ -46,8 +46,6 @@
             var $a, $aRest, $app, $lists, $listsRest, $nav, $window, Timer, prevWidth, slideTime, updateClass;
 
             slideTime = 250;
-
-            $window = $(window);
 
             $lists = ele.find('ul').parent('li');
 

@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('app')
-    .factory('commuter', function(Friend, HotFriends, Auth, socket, location, $timeout) {
+    .factory('commuter', function($rootScope, Friend, HotFriends, Auth, socket, location, $timeout, Properties) {
 
         var _commuter = {};
-        var _me = Auth.getCurrentUser()
+        var _me = Auth.getCurrentUser();
+        var _beaconLaunched = false;
 
         var _LoadFriends = function() {
             Friend.get(null, function(data) {
@@ -18,7 +19,10 @@ angular.module('app')
                 }
 
                 _addTokenForListenFriend(HotFriends.list);
-                beacon();
+                if(!_beaconLaunched){
+                    _beaconLaunched = true;
+                    beacon();
+                } 
 
             }, function(data) {
 
@@ -46,7 +50,7 @@ angular.module('app')
             var info = {};
 
             location.position().then(function(p_position) {
-                
+
                 console.log('emiting');
                 info.latitude = p_position.coords.latitude;
                 info.longitude = p_position.coords.longitude;
@@ -64,8 +68,13 @@ angular.module('app')
             });
         }
 
+        var _reloadFriends = function(){
+            $rootScope.$on(Properties.events.RELOAD_FRIENDS, _LoadFriends);
+        };
+
         var _init = function() {
             _LoadFriends();
+            _reloadFriends();
         };
 
         if (_me.$promise) {
