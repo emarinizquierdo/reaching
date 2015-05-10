@@ -16,16 +16,16 @@
 
                 var loc;
                 loc = new google.maps.LatLng(p_friend.latitude, p_friend.longitude);
-                if (!markers[p_friend.email]) {
+                if (!markers[p_friend.googleId]) {
 
-                    markers[p_friend.email] = new google.maps.Marker({
+                    markers[p_friend.googleId] = new google.maps.Marker({
                         title: "Marker: ",
                         icon: (p_friend.userInfo && p_friend.userInfo.google && p_friend.userInfo.google.image && p_friend.userInfo.google.image.url) ? p_friend.userInfo.google.image.url : null
                     });
 
                 }
-                markers[p_friend.email].setPosition(loc);
-                markers[p_friend.email].setMap($scope.map);
+                markers[p_friend.googleId].setPosition(loc);
+                markers[p_friend.googleId].setMap($scope.map);
 
 
             };

@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
 var FriendSchema = new Schema({
 	userId: mongoose.Schema.Types.ObjectId,
     email: String,
+    googleId: String,
     canSee: Boolean,
     seeing: Boolean
 });

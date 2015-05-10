@@ -86,7 +86,7 @@
                                         <tbody>
                                             <tr ng-repeat="friend in friends">
                                                 <td>{{$index}}</td>
-                                                <td>{{friend.email}}</td>
+                                                <td>{{friend.googleId}}</td>
                                                 <td><span class="label label-info">{{friend.canSee}}</span></td>
                                                 <td>
                                                     <span class="label label-info">{{friend.seeing}}</span>
@@ -103,7 +103,7 @@
                                     <div flex="66">
                                         <md-input-container>
                                             <label>Email</label>
-                                            <input ng-model="friend.email">
+                                            <input ng-model="friend.googleId">
                                         </md-input-container>
                                         <angucomplete id="members"
               placeholder="Search members"

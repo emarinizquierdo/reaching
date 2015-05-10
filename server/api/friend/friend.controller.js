@@ -23,14 +23,14 @@ exports.index = function(req, res) {
             return handleError(res, err);
         }
 
-        _matchUserEmail(0, friends.length, friends, function(_friends) {
+        _matchUserGoogleId(0, friends.length, friends, function(_friends) {
             return res.json(200, _friends);
         });
 
     });
 };
 
-var _matchUserEmail = function(_index, _total, _friends, _callback) {
+var _matchUserGoogleId = function(_index, _total, _friends, _callback) {
 
     if(!_friends || !_friends[_index]){
         return 
@@ -38,7 +38,7 @@ var _matchUserEmail = function(_index, _total, _friends, _callback) {
     
     var _aux = _.clone(_friends[_index], false);
     User.findOne({
-        email: _friends[_index].email
+        'google.id': _friends[_index].googleId
     }, function(err, user) {
 
         if (user) {
@@ -49,7 +49,7 @@ var _matchUserEmail = function(_index, _total, _friends, _callback) {
         ++_index;
 
         if (_index < _total) {
-            _matchUserEmail(_index, _total, _friends, _callback);
+            _matchUserGoogleId(_index, _total, _friends, _callback);
         } else {
             _callback(_friends);
         }

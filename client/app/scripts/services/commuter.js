@@ -15,7 +15,7 @@ angular.module('app')
                 HotFriends.list = {};
 
                 for (_i = 0; _i < data.length; _i++) {
-                    HotFriends.list[data[_i].email] = data[_i]
+                    HotFriends.list[data[_i].googleId] = data[_i]
                 }
 
                 _addTokenForListenFriend(HotFriends.list);
@@ -32,16 +32,17 @@ angular.module('app')
         var _addTokenForListenFriend = function(p_friends, p_token) {
 
             angular.forEach(p_friends, function(p_friend) {
-                socket.listenPositions(p_friend.email, _me.email, _updateFriend);
+                var _listenKey = (_me.google && _me.google.id) ? _me.google.id : _me.email;
+                socket.listenPositions(p_friend.googleId, _listenKey, _updateFriend);
 
             })
 
         };
 
         var _updateFriend = function(data) {
-            if (HotFriends.list[data.info.email]) {
-                HotFriends.list[data.info.email].latitude = data.info.latitude
-                HotFriends.list[data.info.email].longitude = data.info.longitude;
+            if (HotFriends.list[data.info.googleId]) {
+                HotFriends.list[data.info.googleId].latitude = data.info.latitude
+                HotFriends.list[data.info.googleId].longitude = data.info.longitude;
             }
         };
 
@@ -63,8 +64,9 @@ angular.module('app')
 
         var _emmitForEach = function(p_friends, p_info) {
             angular.forEach(HotFriends.list, function(p_friend) {
-                p_info.email = _me.email;
-                socket.emit(p_friend.email, _me.email, p_info);
+                var _listenKey = (_me.google && _me.google.id) ? _me.google.id : _me.email;
+                p_info.googleId = _listenKey;
+                socket.emit(p_friend.googleId, _listenKey, p_info);
             });
         }
 
