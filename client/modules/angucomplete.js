@@ -193,7 +193,9 @@ angular.module('angucomplete', [])
                         result.title = result.title.toString().replace(/(<([^>]+)>)/ig, '');
                     }
                     $scope.searchStr = $scope.lastSearchTerm = result.title;
-                    $scope.selectedObject = result;
+                    $scope.selectedObject = {};
+                    $scope.selectedObject.googleProfile = (result && result.originalObject) ? angular.copy(result.originalObject) : null;
+                    $scope.selectedObject.googleId = result.originalObject.id;
                     $scope.showDropdown = false;
                     $scope.results = [];
                     //$scope.$apply();

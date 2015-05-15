@@ -7,6 +7,7 @@ var FriendSchema = new Schema({
 	userId: mongoose.Schema.Types.ObjectId,
     email: String,
     googleId: String,
+    googleProfile : {},
     canSee: Boolean,
     seeing: Boolean
 });

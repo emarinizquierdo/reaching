@@ -50,11 +50,19 @@ angular.module('app')
         function _LoadFriends() {
             Friend.get(null, function(data) {
                 $scope.friends = data;
-                $scope.easypiechartsm4.percent = ($scope.friends.length * 100) / $scope.totalFriends;
+                $scope.doughnut.data[0] = $scope.friends.length;
+                $scope.doughnut.data[1] = $scope.totalFriends - $scope.friends.length
                 $rootScope.$emit(Properties.events.RELOAD_FRIENDS);
             }, function(data) {
 
             });
+        }
+
+        $scope.doughnut = {
+            labels: ["", "Usuarios añadidos"],
+            legend: true,
+            data: [],
+            colours: ['#FD1F5E','#1EF9A1','#7FFD1F','#68F000']
         }
 
         $scope.easypiechartsm4 = {

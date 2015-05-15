@@ -22,7 +22,7 @@
         // Custom module
         //,'app.nav'
         ,'app.i18n'
-        //,'app.chart'
+        ,'app.chart'
         //,'app.ui'
         ,'app.ui.form'
         ,'app.ui.form.validation'

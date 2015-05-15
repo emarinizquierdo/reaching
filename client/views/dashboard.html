@@ -8,21 +8,9 @@
             <div class="col-lg-6 col-xsm-6">
                 <div class="panel panel-default">
                     <div class="panel-body text-center">
-                        <div easypiechart options="easypiechartsm4.options" percent="easypiechartsm4.percent" class="easypiechart easypiechart-sm">
-                            <span class="pie-percent" ng-bind="easypiechartsm4.percent"></span>
-                        </div>
-                        <p class="text-center text-muted">Usuarios añadidos</p>
+                        <canvas class="chart chart-doughnut" data="doughnut.data" labels="doughnut.labels"></canvas>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-xsm-6">
-                <div class="panel panel-default">
-                    <div class="panel-body text-center">
-                        <div easypiechart options="easypiechartsm4.options" percent="easypiechartsm4.percent" class="easypiechart easypiechart-sm">
-                            <span class="pie-percent" ng-bind="easypiechartsm4.percent"></span>
-                        </div>
-                        <p class="text-center text-muted">Usuarios añadidos</p>
-                    </div>
+                    <p class="text-center text-muted">Usuarios añadidos</p>
                 </div>
             </div>
         </div>
@@ -56,18 +44,18 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
-                                <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length">
-                                    <div flex="66">
+                                
+                                <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length" layout-wrap layout-fill>
+                                    <div flex="55">
                                         <md-input-container>
                                             <label>DeviceId</label>
                                             <input ng-model="device.deviceId">
                                         </md-input-container>
                                     </div>
-                                    <div flex="33">
-                                        <md-button ng-click="saveDevice(device)" class="md-raised btn-w-sm md-primary">Add</md-button>
+                                    <div flex="33" flex="33" layout="row" layout-align="space-around center">
+                                        <md-button flex ng-click="saveDevice(device)" class="md-raised btn-w-sm md-primary">Add</md-button>
                                     </div>
-                                </div>
+                                </div></div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -76,7 +64,6 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>Usuario</th>
                                                 <th>Puede verte</th>
                                                 <th>Puedes verle</th>
@@ -85,8 +72,7 @@
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="friend in friends">
-                                                <td>{{$index}}</td>
-                                                <td>{{friend.googleId}}</td>
+                                                <td><img ng-src="{{friend.googleProfile.image.url}}" alt="" class="img-circle img30_30"><span class="friend-title">{{friend.googleProfile.displayName}}</span></td>
                                                 <td><span class="label label-info">{{friend.canSee}}</span></td>
                                                 <td>
                                                     <span class="label label-info">{{friend.seeing}}</span>
@@ -98,28 +84,15 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
-                                <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length">
-                                    <div flex="66">
-                                        <md-input-container>
-                                            <label>Email</label>
-                                            <input ng-model="friend.googleId">
-                                        </md-input-container>
-                                        <angucomplete id="members"
-              placeholder="Search members"
-              pause="400"
-              selectedobject="testObj"
-              url="http://myserver.com/api/user/find?s="
-              datafield="results"
-              titlefield="displayName"
-              descriptionfield="email"
-              imagefield="profilePic"
-              inputclass="form-control form-control-small"/>
+                                
+                                <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length" layout-wrap layout-fill>
+                                    <div flex="55">
+                                        <angucomplete id="members" placeholder="Search members" pause="400" selectedobject="friend" datafield="results" titlefield="displayName" descriptionfield="email" imagefield="profilePic" inputclass="form-control form-control-small" />
                                     </div>
-                                    <div flex="33">
-                                        <md-button ng-click="saveFriend(friend)" class="md-raised btn-w-sm md-primary">Add</md-button>
+                                    <div flex="33" layout="row" layout-align="space-around center">
+                                        <md-button flex ng-click="saveFriend(friend)" class="md-raised btn-w-sm md-primary">Add</md-button>
                                     </div>
-                                </div>
+                                </div></div>
                             </div>
                         </div>
                     </div>
