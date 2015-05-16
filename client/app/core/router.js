@@ -12,6 +12,10 @@
             },{
                 route: 'dashboard',
                 authenticate: true
+            },{
+                route: 'show',
+                params: 'userId',
+                authenticate: true
             }, {
                 route: 'ui/cards',
                 authenticate: true
@@ -98,6 +102,9 @@
                 route: 'pages/profile',
                 authenticate: true
             }, {
+                route: 'pages/show',
+                authenticate: true
+            }, {
                 route: 'app/calendar',
                 authenticate: true
             },
@@ -113,6 +120,8 @@
             setRoutes = function(route) {
                 var config, url;
                 url = '/' + route.route;
+
+                url = (route.params) ? url + '/:' + route.params : url;
 
                 config = {
                     url: url,

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .factory('commuter', function($rootScope, Friend, HotFriends, Auth, socket, location, $timeout, Properties) {
+    .factory('commuter', function($rootScope, Friend, HotFriends, Auth, socket, location, $timeout, Properties, Me) {
 
         var _commuter = {};
         var _me = Auth.getCurrentUser();
@@ -19,10 +19,10 @@ angular.module('app')
                 }
 
                 _addTokenForListenFriend(HotFriends.list);
-                if(!_beaconLaunched){
+                if (!_beaconLaunched) {
                     _beaconLaunched = true;
                     beacon();
-                } 
+                }
 
             }, function(data) {
 
@@ -55,6 +55,12 @@ angular.module('app')
                 console.log('emiting');
                 info.latitude = p_position.coords.latitude;
                 info.longitude = p_position.coords.longitude;
+                
+                Me.geoloc = {
+                    latitude : info.latitude,
+                    longitude : info.longitude
+                };
+
                 _emmitForEach(HotFriends.list, info);
                 $timeout(beacon, 5000);
 
@@ -64,19 +70,22 @@ angular.module('app')
 
         var _emmitForEach = function(p_friends, p_info) {
             angular.forEach(HotFriends.list, function(p_friend) {
-                var _listenKey = (_me.google && _me.google.id) ? _me.google.id : _me.email;
-                p_info.googleId = _listenKey;
-                socket.emit(p_friend.googleId, _listenKey, p_info);
+                if (p_friend.canSee) {
+                    var _listenKey = (_me.google && _me.google.id) ? _me.google.id : _me.email;
+                    p_info.googleId = _listenKey;
+                    socket.emit(p_friend.googleId, _listenKey, p_info);
+                }
             });
         }
 
-        var _reloadFriends = function(){
+        var _reloadFriends = function() {
             $rootScope.$on(Properties.events.RELOAD_FRIENDS, _LoadFriends);
         };
 
         var _init = function() {
             _LoadFriends();
             _reloadFriends();
+            Me.google = _me.google;
         };
 
         if (_me.$promise) {

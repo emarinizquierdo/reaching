@@ -1,17 +1,15 @@
 <div class="page page-dashboard" ng-controller="dashboardCtrl">
-    <div class="row">
-        <div class="col-lg-8 col-xsm-7">
+    <div layout="row" layout-sm="column" layout-align="start center">
+        <div flex="75">
             <h2 class="section-header">Dashboard</h2>
             <p class="lead">Gestiona usuarios que podrán ver dónde te encuentras</p>
         </div>
-        <div class="col-lg-4 col-xsm-5row">
-            <div class="col-lg-6 col-xsm-6">
-                <div class="panel panel-default">
-                    <div class="panel-body text-center">
-                        <canvas class="chart chart-doughnut" data="doughnut.data" labels="doughnut.labels"></canvas>
-                    </div>
-                    <p class="text-center text-muted">Usuarios añadidos</p>
+        <div flex="25" flex-sm="100">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <canvas class="chart chart-doughnut" data="doughnut.data" labels="doughnut.labels"></canvas>
                 </div>
+                <p class="text-center text-muted">Usuarios</p>
             </div>
         </div>
     </div>
@@ -44,18 +42,18 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                
-                                <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length" layout-wrap layout-fill>
-                                    <div flex="55">
-                                        <md-input-container>
-                                            <label>DeviceId</label>
-                                            <input ng-model="device.deviceId">
-                                        </md-input-container>
+                                    <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length" layout-wrap layout-fill>
+                                        <div flex="55">
+                                            <md-input-container>
+                                                <label>DeviceId</label>
+                                                <input ng-model="device.deviceId">
+                                            </md-input-container>
+                                        </div>
+                                        <div flex="33" flex="33" layout="row" layout-align="space-around center">
+                                            <md-button flex ng-click="saveDevice(device)" class="md-raised btn-w-sm md-primary">Add</md-button>
+                                        </div>
                                     </div>
-                                    <div flex="33" flex="33" layout="row" layout-align="space-around center">
-                                        <md-button flex ng-click="saveDevice(device)" class="md-raised btn-w-sm md-primary">Add</md-button>
-                                    </div>
-                                </div></div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -64,18 +62,22 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
-                                                <th>Usuario</th>
-                                                <th>Puede verte</th>
-                                                <th>Puedes verle</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="friend in friends">
-                                                <td><img ng-src="{{friend.googleProfile.image.url}}" alt="" class="img-circle img30_30"><span class="friend-title">{{friend.googleProfile.displayName}}</span></td>
-                                                <td><span class="label label-info">{{friend.canSee}}</span></td>
+                                                <td class="cursor" ng-click="show(friend._id)"><img ng-src="{{friend.googleProfile.image.url}}" alt="" class="img-circle img30_30"><span class="friend-title">{{friend.googleProfile.displayName}}</span></td>
                                                 <td>
-                                                    <span class="label label-info">{{friend.seeing}}</span>
+                                                    <md-button class="md-raised md-primary btn-xs" ng-click="toogleCansee(friend)" ng-class="{'md-warn' : !friend.canSee}">
+                                                        <span class="imd " ng-class="{'imd-visibility' : friend.canSee, 'imd-visibility-off' : !friend.canSee}"></span>
+                                                    </md-button>
+                                                </td>
+                                                <td>
+                                                    <span class="imd " ng-class="{'imd-wifi-tethering' : friend.seeing, 'imd-portable-wifi-off' : !friend.seeing}"></span>
                                                 </td>
                                                 <td>
                                                     <md-button class="md-raised md-warn btn-xs" ng-click="deleteFriend(friend._id)"><span class="imd imd-delete"></span></md-button>
@@ -84,15 +86,15 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                
-                                <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length" layout-wrap layout-fill>
-                                    <div flex="55">
-                                        <angucomplete id="members" placeholder="Search members" pause="400" selectedobject="friend" datafield="results" titlefield="displayName" descriptionfield="email" imagefield="profilePic" inputclass="form-control form-control-small" />
+                                    <div layout="row" layout-align="space-around center" layout-margin ng-if="totalFriends > friends.length" layout-wrap layout-fill>
+                                        <div flex="55">
+                                            <angucomplete id="members" placeholder="Search members" pause="400" selectedobject="friend" datafield="results" titlefield="displayName" descriptionfield="email" imagefield="profilePic" inputclass="form-control form-control-small" />
+                                        </div>
+                                        <div flex="33" layout="row" layout-align="space-around center">
+                                            <md-button flex ng-click="saveFriend(friend)" class="md-raised btn-w-sm md-primary">Add</md-button>
+                                        </div>
                                     </div>
-                                    <div flex="33" layout="row" layout-align="space-around center">
-                                        <md-button flex ng-click="saveFriend(friend)" class="md-raised btn-w-sm md-primary">Add</md-button>
-                                    </div>
-                                </div></div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -3,11 +3,9 @@
 
             var i, markers = {};
 
-
-
-
             var _routeID = "emmiting:";
             var _travelMode = 'driving';
+            
             $scope.route;
             $scope.myPosition = {};
             $scope.HotFriends = HotFriends;

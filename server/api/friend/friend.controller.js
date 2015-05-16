@@ -90,21 +90,22 @@ exports.create = function(req, res) {
 // Updates an existing friend in the DB.
 exports.update = function(req, res) {
     var userId = req.user._id;
-    if (req.body._id) {
-        delete req.body._id;
-    }
+
+    console.log('body: ' + req.body._id);
+    console.log('userid ' + userId )
     Friend.find({
-        _id: req.params.id,
+        _id: req.body._id,
         userId: userId
     }, function(err, friend) {
+        console.log(friend);
         if (err) {
             return handleError(res, err);
         }
         if (!friend) {
             return res.send(404);
         }
-        var updated = _.merge(friend, req.body);
-        updated.save(function(err) {
+        var updated = _.merge(friend[0], req.body);
+        updated.save(function(err, friend) {
             if (err) {
                 return handleError(res, err);
             }

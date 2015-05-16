@@ -1,0 +1,16 @@
+.show .show-title {
+    margin-left: 0px;
+}
+
+.show .friend-img {
+    width: 80px;
+}
+
+.show .where-is {
+    font-size: 27px;
+}
+
+.show .title {
+    color: #3F51B5;
+    font-weight: 300;
+}

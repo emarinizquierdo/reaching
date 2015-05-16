@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .controller('dashboardCtrl', ['$rootScope', '$scope', '$window', 'Friend', 'Device', 'Properties', function($rootScope, $scope, $window, Friend, Device, Properties) {
+    .controller('dashboardCtrl', ['$rootScope', '$scope', '$window', '$location', 'Friend', 'Device', 'Properties', function($rootScope, $scope, $window, $location, Friend, Device, Properties) {
 
         $scope.totalFriends = 10;
         $scope.friends = [];
@@ -31,6 +31,15 @@ angular.module('app')
 
         }
 
+        $scope.toogleCansee = function( p_data ) {
+
+            p_data.canSee = (p_data.canSee) ? !p_data.canSee : true;
+            Friend.update(p_data, _LoadFriends, function(data) {
+                $rootScope.$emit(Properties.events.RELOAD_FRIENDS);
+            });
+
+        }
+
         $scope.deleteFriend = function(_id) {
             Friend.delete({
                 id: _id
@@ -38,6 +47,10 @@ angular.module('app')
                 $rootScope.$emit(Properties.events.RELOAD_FRIENDS);
             });
         }
+
+        $scope.show = function(_id){
+            $location.path('show/' + _id);
+        };
 
         function _LoadDevices() {
             Device.get(null, function(data) {
@@ -59,7 +72,7 @@ angular.module('app')
         }
 
         $scope.doughnut = {
-            labels: ["", "Usuarios añadidos"],
+            labels: ["Añadidos ", "Libres "],
             legend: true,
             data: [],
             colours: ['#FD1F5E','#1EF9A1','#7FFD1F','#68F000']

@@ -1,0 +1,25 @@
+<div class="page page-dashboard show" ng-controller="showCtrl">
+    <div layout="column">
+        <div layout="row" layout-align="start center">
+            <div class="friend-img" layout-margin>
+                <img ng-src="{{friend.googleProfile.image.url}}" alt="" class="img-circle img60_60">
+            </div>
+            <div >
+                <h1 class="md-display-3 title">{{friend.googleProfile.displayName}} <span class="where-is">está a tan sólo</span> {{duration}}  <span class="where-is">de ti</span></h1>
+            </div>
+        </div>
+        <div class="row ui-section">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <section class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="bigmap" class="ui-map"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
