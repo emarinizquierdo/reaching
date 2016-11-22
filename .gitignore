@@ -2,11 +2,4 @@ node_modules
 dist
 .tmp
 .sass-cache
-client/bower_components
-landing/bower_components
-landing/css/main.css
-landing/vendors
-
-.DS_Store
-npm-debug.log
-/preview/preview.zip
+bower_components
