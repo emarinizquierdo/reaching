@@ -1,0 +1,78 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="/bower_components/app-layout/helpers/helpers.html">
+<link rel="import" href="/bower_components/app-route/app-location.html">
+<link rel="import" href="/bower_components/app-route/app-route.html">
+<link rel="import" href="/bower_components/iron-pages/iron-pages.html">
+
+<!-- Since 'home' is the default route, eagerly load it. -->
+<link rel="import" href="/src/views/app-home.html">
+<link rel="import" href="/src/views/app-reaching.html">
+<link rel="import" href="/src/views/app-404-warning.html">
+
+<dom-module id="app-content">
+
+    <template>
+        <style>
+
+        </style>
+        <app-location route="{{route}}"></app-location>
+
+        <!-- Two routes, one for the home page, and one for the tabs page. -->
+        <app-route route="{{route}}" pattern="/:view" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+        <iron-pages selected="[[routeData.view]]" attr-for-selected="name" fallback-selection="404">
+            <!-- home view -->
+            <app-home name=""></app-home>
+            <!-- list view of items in a category -->
+            <app-reaching name="reaching"></app-reaching>
+
+            <app-404-warning name="404"></app-404-warning>
+
+        </iron-pages>
+
+        <div hidden$="{{!homeActive}}">
+            Main page!
+            <br>
+            <br>
+            <a href="/reaching">Tabs page</a>
+        </div>
+        <div hidden$="{{!tabsActive}}">
+            <a href="/">Back to main page</a>
+            <!-- tabs-page is an element that handles routing within itself.
+           view-source for more details!
+        -->
+            <tabs-page route="{{tabsRoute}}"></tabs-page>
+        </div>
+    </template>
+    <script>
+
+
+        Polymer({
+            is: 'app-content',
+            observers: [
+                '_routeChanged(route.*)',
+                '_viewChanged(routeData.view)'
+            ],
+            _routeChanged: function(changeRecord) {
+                if (changeRecord.path === 'path') {
+                    console.log('Path changed!');
+                }
+            },
+            _viewChanged: function(view) {
+                // load data for view
+                console.log('view changed!');
+            }
+        });
+    </script>
+
+</dom-module>
