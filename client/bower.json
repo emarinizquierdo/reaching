@@ -18,9 +18,13 @@
     "iron-overlay-behavior": "polymerelements/iron-overlay-behavior#^1.0.0",
     "iron-pages": "polymerelements/iron-pages#^1.0.0",
     "iron-selector": "polymerelements/iron-selector#^1.0.0",
+    "note-app-elements": "polymerlabs/note-app-elements",
     "paper-icon-button": "polymerelements/paper-icon-button#^1.0.0",
     "paper-spinner": "polymerelements/paper-spinner#^1.0.0",
-    "paper-button": "PolymerElements/paper-button#^1.0.14"
+    "paper-button": "PolymerElements/paper-button#^1.0.14",
+    "firebase-element": "GoogleWebComponents/firebase-element#^1.0.16",
+    "polymerfire": "firebase/polymerfire#^0.10.3",
+    "geo-location": "ebidel/geo-location#^1.0.6"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

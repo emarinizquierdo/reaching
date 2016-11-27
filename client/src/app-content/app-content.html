@@ -13,11 +13,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="/bower_components/app-route/app-location.html">
 <link rel="import" href="/bower_components/app-route/app-route.html">
 <link rel="import" href="/bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="/bower_components/iron-pages/iron-pages.html">
+
 
 <!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="/src/views/app-home.html">
 <link rel="import" href="/src/views/app-reaching.html">
 <link rel="import" href="/src/views/app-404-warning.html">
+<link rel="import" href="/src/app-login/app-login.html">
 
 <dom-module id="app-content">
 
@@ -25,6 +28,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <style>
 
         </style>
+
+        <note-app></note-app>
         <app-location route="{{route}}"></app-location>
 
         <!-- Two routes, one for the home page, and one for the tabs page. -->
